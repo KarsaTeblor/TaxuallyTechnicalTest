@@ -29,14 +29,17 @@ namespace Taxually.TechnicalTest.Controllers
         [HttpPost]
         [Route("register")]
         [SwaggerResponse((int)HttpStatusCode.OK)]
-        [SwaggerResponse((int)HttpStatusCode.Forbidden, Type = null)]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError, Type = null)]
         public async Task<ActionResult> Register([FromBody] VatRegistrationRequest vatRegistrationRequest)
         {
+            _logger.LogInformation("[VatRegistrationController.Register] Request started");
             var serviceResponse = await _vatRegistrationServiceManager.RegisterVat(vatRegistrationRequest);
             if (serviceResponse.HasError)
             {
+                _logger.LogError("[VatRegistrationController.Register] Error occurred!");
                 return StatusCode(500);
             }
+            _logger.LogError("[VatRegistrationController.Register] Ending request with OK");
             return Ok();
         }
     }

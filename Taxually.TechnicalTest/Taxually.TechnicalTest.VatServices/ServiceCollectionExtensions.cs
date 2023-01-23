@@ -22,7 +22,7 @@ namespace Taxually.TechnicalTest.VatServices
             {
                 return new Dictionary<CountryCode, IVatRegistrationService>() {
                     {CountryCode.FR, new VatRegistrationService_FR(sp.GetService<ITaxuallyQueueClient>()) },
-                    {CountryCode.GB, new VatRegistrationService_GB(sp.GetService<TaxuallyHttpClient>()) },
+                    {CountryCode.GB, new VatRegistrationService_GB(sp.GetService<ITaxuallyHttpClient>()) },
                     {CountryCode.DE, new VatRegistrationService_DE(sp.GetService<ITaxuallyQueueClient>()) }
                 };
             });

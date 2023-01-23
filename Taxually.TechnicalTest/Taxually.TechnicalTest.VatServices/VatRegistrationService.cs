@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Taxually.TechnicalTest.Domain.General;
+﻿using Taxually.TechnicalTest.Domain.General;
 using Taxually.TechnicalTest.Domain.VatRegistration;
 using Taxually.TechnicalTest.VatServices.Interface;
-using Taxually.TechnicalTest.VatServices.VatRegistrationServices;
 
 namespace Taxually.TechnicalTest.VatServices
 {

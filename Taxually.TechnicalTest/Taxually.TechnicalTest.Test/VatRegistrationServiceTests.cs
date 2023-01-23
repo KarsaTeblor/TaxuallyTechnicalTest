@@ -1,19 +1,44 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using System;
 using Taxually.TechnicalTest.Domain.General;
 using Taxually.TechnicalTest.Domain.VatRegistration;
 using Taxually.TechnicalTest.VatServices;
 using Taxually.TechnicalTest.VatServices.Interface;
-using Taxually.TechnicalTest.VatServices.VatRegistrationServices;
 
 namespace Taxually.TechnicalTest.Test
 {
     public class Tests
     {
+        ServiceCollection services;
+        ServiceProvider serviceProvider;
+
+        [SetUp]
+        public void Setup()
+        {
+            IConfigurationRoot configuration;
+            var builder = new ConfigurationBuilder();
+            configuration = builder.Build();
+
+            services = new ServiceCollection();
+
+            ServiceConfiguration.RegisterServices(services, configuration);
+
+            serviceProvider = services.BuildServiceProvider();
+        }
 
         [Test]
+        public async Task VatRegistrationServiceCount_ShouldCheckVatregistrationServiceCount()
+        {
+            var vatRegistrationServices = serviceProvider.GetService<IDictionary<CountryCode, IVatRegistrationService>>();
+            Assert.IsTrue(vatRegistrationServices.Count() == 3);
+
+            Assert.IsTrue(vatRegistrationServices.ContainsKey(CountryCode.FR));
+            Assert.IsTrue(vatRegistrationServices.ContainsKey(CountryCode.DE));
+            Assert.IsTrue(vatRegistrationServices.ContainsKey(CountryCode.GB));
+        }
+
+            [Test]
         public async Task VatRegistrationService_CalledWithDifferentCountryCodes_ShouldCallRightServices()
         {
             Mock<IVatRegistrationService> vatRegistrationService_DE = new();

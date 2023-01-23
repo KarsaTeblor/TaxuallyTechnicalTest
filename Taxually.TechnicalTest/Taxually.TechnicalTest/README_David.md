@@ -7,15 +7,15 @@ Tasks are described in README.md, outside of the project
 
 - Running project from Visual Studio doesn't open browser automatically, need to open it manually on https://localhost:7132, Swagger is under https://localhost:7132/swagger/index.html
 - Removed not secure http endpoint
-- Created two environments: Development and Production, configuration in appsettings
+- Created two environments: Development and Production; configuration in appsettings
 - Added AutoMapper to transform between models
 - Exchanged "Task.Wait()"-s with async "Task()-s"
-- ServiceResults with errors doesn't have Result object | or should we support non-null policy?
+- ServiceResults with errors doesn't have Result object 
 - The solution is built as a monolith, but it is loosely coupled
 - For server error we return Http 500, this sould be more precise (eg.: 403, 400 etc.)
 - Taxually.TechnicalTest.Test is a mixture, should be sorted out for unit/integration/projects
 - Used Moq as mocking service
-- RegisterVatServices is called to register VatServices project dependencies
+- ServiceCollectionExtensions.RegisterVatServices is called to register VatServices project dependencies
 
 ## Assumptions
 
@@ -25,11 +25,12 @@ Tasks are described in README.md, outside of the project
 ## Questions to tech team
 
 - What HTTP statuses do we communicate with?
+- Should we support not-null policy?
 
 ## Questions to product manager
 
 - Should VatRegistration endpoint return a response? VatRegistrationResponse is empty right now
-- What error message should we send back to users?
+- What error messages should we send back to users?
 - What informations can be logged/which of those are sensitive?
 
 ## Future ideas
